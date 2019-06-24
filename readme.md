@@ -1,72 +1,87 @@
-<p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
+# Trubar
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+**This package is currently being designed, developed and documented. In its current state, it is likely NOT YET fit for production.**
 
-## About Laravel
+A Laravel alternative to WordPress + Sage way of creating websites. Everything but the HTML/CSS/JS part of the website (and business logic) can be created in the admin interface. Plugins and themes are supported.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Inspired in part by [Laravel Nova](https://nova.laravel.com) and [Wink](https://github.com/writingink/wink).
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Why?
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Most web development agencies decide on using WordPress for their client work. The reason for that is simple: most people know how to use it or can learn to interface with it quickly. However, we believe the development experience of developing WordPress websites is lacking. We believe there is a better way.
 
-## Learning Laravel
+This is why we have decided to build Trubar on top of Laravel Framework, a PHP framework known for being developer-friendly.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Trubar is a fork of Laravel Framework. As such, changes to the Laravel Framework will be merged with Trubar.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1400 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Most of the changes are stored within the `Trubar` folder with 3 subfolders:
+- Admin
+- Plugins
+- Themes
 
-## Laravel Sponsors
+Custom routes are loaded via `routes/trubar.php`. 
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Everything else is Laravel as you know it, easily extensible and upgradable.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
+*This package is still in active development, so you might want to [watch](https://github.com/wewowweb/trubar/subscription) the repository to be notified of future changes.*
+
+## Installation
+
+Trubar is meant to be installed as a greenfield project.
+
+### Minimum Requirements
+Trubar minimum requirements are:
+- PHP v7.1.3 or greater
+- MySQL v5.7 or Postgres v9.2 or greater
+
+### Installing from source
+
+These are the steps needed to install Trubar from source:
+
+**STEP 1:**
+```bash
+composer create-project wewowweb/trubar trubar
+```
+**STEP 2:**
+```bash
+cd trubar/
+```
+**STEP 3:**
+```bash
+cp .env.example .env
+```
+**STEP 4:**
+```bash
+composer install && npm install
+```
+**STEP 5:**
+```bash
+php artisan serve
+```
+
+### Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
 
 ## Contributing
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+We welcome the contributions to Trubar, but in order to avoid unpleasant situations, please follow these bullet point guidelines:
 
-## Security Vulnerabilities
+1. Open an issue prior to submitting a PR to discuss the proposed changes with the core development team.
+2. All the PRs should be submitted into **develop** branch. PRs to master, laravel-develop and laravel-master branches will likely be rejected.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### Security
+
+If you discover any security related issues, please email us at **hello@wewowweb.com** instead of using the issue tracker.
+
+## Credits
+
+- [We Wow Web](https://github.com/wewowweb)
+- [Gal Jakic](https://github.com/morpheus7CS)
+- [Matija Kogovsek](https://github.com/kogovsekm)
+- [Miha Medven](https://github.com/aweCodeMan)
+- [All Contributors](../../contributors)
 
 ## License
 
-The Laravel framework is open-source software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
