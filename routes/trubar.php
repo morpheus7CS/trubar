@@ -8,7 +8,7 @@
 */
 
 Route::get('/', function () {
-    return "Hello Trubar";
+    return 'Hello Trubar';
 });
 
 Auth::routes();
