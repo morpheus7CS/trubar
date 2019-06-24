@@ -39,7 +39,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapTrubarRoutes();
     }
 
     /**
@@ -69,5 +69,20 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+    /**
+     * Define the routes for Trubar CMS.
+     *
+     * These routes are typically stateless.
+     *
+     * @return void
+     */
+    protected function mapTrubarRoutes()
+    {
+        Route::prefix('trubar')
+             ->middleware('web')
+             ->namespace($this->namespace)
+             ->group(base_path('routes/trubar.php'));
     }
 }
