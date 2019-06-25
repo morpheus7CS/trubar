@@ -1,12 +1,29 @@
 {
-    "name": "laravel/laravel",
-    "type": "project",
-    "description": "The Laravel Framework.",
+    "name": "wewowweb/trubar",
+    "description": "Trubar CMS - A Laravel alternative to WordPress and Sage",
     "keywords": [
-        "framework",
-        "laravel"
+        "trubar",
+        "laravel",
+        "content management system"
     ],
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Gal Jakic",
+            "email": "gal@wewowweb.com",
+            "role": "Author"
+        },
+        {
+            "name": "Matija Kogovsek",
+            "email": "kogovsek.matija@gmail.com",
+            "role": "Author"
+        },
+        {
+            "name": "Miha Medven",
+            "email": "mihec.susnik@gmail.com",
+            "role": "Author"
+        }
+    ],
     "require": {
         "php": "^7.1.3",
         "fideloper/proxy": "^4.0",
