@@ -42,26 +42,27 @@ class TrubarPost extends Model
 
     public function author()
     {
-        $this->belongsTo(User::class, 'author_id');
+        return $this->belongsTo(User::class, 'author_id');
     }
 
     public function children()
     {
-        $this->hasMany(self::class);
+        return $this->hasMany(self::class);
     }
 
     public function comments()
     {
-        $this->hasMany(TrubarComment::class);
+        return $this->hasMany(TrubarComment::class);
     }
 
     public function parent()
     {
-        $this->hasOne(self::class);
+        return $this->hasOne(self::class);
     }
 
     public function type()
     {
-        $this->hasOne(TrubarPostType::class);
+        return $this->hasOne(TrubarPostType::class);
     }
 }
+
