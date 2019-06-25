@@ -5,6 +5,10 @@ namespace Trubar\Admin\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\User;
+use Trubar\Admin\Models\TrubarComment;
+use Trubar\Admin\Models\TrubarPostType;
+
 class TrubarPost extends Model
 {
     use SoftDeletes;
