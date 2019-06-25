@@ -17,7 +17,7 @@ class TrubarPost extends Model
 
     public function children()
     {
-        $this->hasMany(TrubarPost::class);
+        $this->hasMany(self::class);
     }
 
     public function comments()
@@ -27,11 +27,11 @@ class TrubarPost extends Model
 
     public function parent()
     {
-        $this->hasOne(TrubarPost::class);
-        
+        $this->hasOne(self::class);
     }
 
-    public function type(){
+    public function type()
+    {
         $this->hasOne(TrubarPostType::class);
     }
 }
