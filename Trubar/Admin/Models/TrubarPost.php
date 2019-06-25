@@ -5,6 +5,7 @@ namespace Trubar\Admin\Models;
 use App\User;
 use Trubar\Admin\Models\TrubarComment;
 use Illuminate\Database\Eloquent\Model;
+use Trubar\Admin\Models\TrubarPostMeta;
 use Trubar\Admin\Models\TrubarPostType;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -56,6 +57,11 @@ class TrubarPost extends Model
     public function comments()
     {
         return $this->hasMany(TrubarComment::class);
+    }
+
+    public function meta()
+    {
+        return $this->hasOne(TrubarPostMeta::class);
     }
 
     public function parent()
