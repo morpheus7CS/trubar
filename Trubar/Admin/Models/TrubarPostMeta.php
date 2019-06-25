@@ -2,10 +2,9 @@
 
 namespace Trubar\Admin\Models;
 
+use Trubar\Admin\Models\TrubarPost;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
-use Trubar\Admin\Models\TrubarPost;
 
 class TrubarPostMeta extends Model
 {
@@ -25,7 +24,7 @@ class TrubarPostMeta extends Model
     protected $fillable =
     [
         'post_id',
-        'content'
+        'content',
     ];
 
     public function post()
