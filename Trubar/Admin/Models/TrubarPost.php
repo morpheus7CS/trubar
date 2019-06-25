@@ -21,7 +21,7 @@ class TrubarPost extends Model
      *
      * @var array
      */
-    protected $fillable = 
+    protected $fillable =
     [
         'author_id',
         'post_type_id',
@@ -30,7 +30,7 @@ class TrubarPost extends Model
         'body',
         'excerpt',
         'permalink',
-        'published_at'
+        'published_at',
     ];
 
     /**
@@ -38,7 +38,6 @@ class TrubarPost extends Model
      *
      * @var array
      */
-
     public $dates = ['published_at'];
 
     public function author()
