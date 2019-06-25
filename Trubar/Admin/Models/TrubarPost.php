@@ -65,4 +65,3 @@ class TrubarPost extends Model
         return $this->hasOne(TrubarPostType::class);
     }
 }
-
