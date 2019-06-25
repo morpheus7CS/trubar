@@ -2,12 +2,11 @@
 
 namespace Trubar\Admin\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
-
 use App\User;
 use Trubar\Admin\Models\TrubarComment;
+use Illuminate\Database\Eloquent\Model;
 use Trubar\Admin\Models\TrubarPostType;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TrubarPost extends Model
 {
