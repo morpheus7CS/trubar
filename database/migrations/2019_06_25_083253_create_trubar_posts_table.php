@@ -24,7 +24,7 @@ class CreateTrubarPostsTable extends Migration
             $table->text('body');
             $table->text('excerpt');
             $table->string('permalink')->unique();
-            $table->dateTime('published_at');
+            $table->dateTime('published_at')->nullable();
 
             $table->timestamps();
             $table->softDeletes();
