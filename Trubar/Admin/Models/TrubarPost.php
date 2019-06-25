@@ -3,12 +3,43 @@
 namespace Trubar\Admin\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TrubarPost extends Model
 {
+    use SoftDeletes;
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
     protected $table = 'trubar_posts';
 
-    protected $fillable = [];
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = 
+    [
+        'author_id',
+        'post_type_id',
+        'parent_id',
+        'title',
+        'body',
+        'excerpt',
+        'permalink',
+        'published_at'
+    ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+
+    public $dates = ['published_at'];
 
     public function author()
     {
