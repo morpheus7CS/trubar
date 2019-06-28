@@ -2,9 +2,9 @@
 
 namespace Wewowweb\Trubar;
 
-use Wewowweb\Trubar\Console\InstallCommand;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
+use Wewowweb\Trubar\Console\InstallCommand;
 
 class TrubarServiceProvider extends ServiceProvider
 {

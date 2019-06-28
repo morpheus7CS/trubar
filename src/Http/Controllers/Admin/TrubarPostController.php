@@ -3,9 +3,8 @@
 namespace Wewowweb\Trubar\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
-use Wewowweb\Trubar\Models\TrubarPost;
 use Illuminate\Routing\Controller;
-
+use Wewowweb\Trubar\Models\TrubarPost;
 
 class TrubarPostController extends Controller
 {
