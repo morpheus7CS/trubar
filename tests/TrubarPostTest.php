@@ -45,7 +45,7 @@ class TrubarPostTest extends BaseTest
     {
         $posts = factory(TrubarPost::class)->times(5)->create();
 
-        $posts->each(function ($item){
+        $posts->each(function ($item) {
             $item->delete();
         });
 
