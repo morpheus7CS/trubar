@@ -2,9 +2,9 @@
 
 namespace Wewowweb\Trubar\Models;
 
-use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Ramsey\Uuid\Uuid;
 
 class TrubarPost extends Model
 {
@@ -21,7 +21,7 @@ class TrubarPost extends Model
     {
         parent::boot();
         self::creating(function ($model) {
-            $model->id = (string) Uuid::generate(4);
+            $model->id = (string) Uuid::uuid4();
         });
     }
 }
