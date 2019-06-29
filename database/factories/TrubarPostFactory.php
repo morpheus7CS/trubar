@@ -9,7 +9,7 @@ $factory->define(TrubarPost::class, function (Faker $faker) {
     return [
     'slug' => $faker->slug,
     'author_id' => 1,
-    'post_type_id' => 1,
+    'post_type' => $faker->word,
     'parent_id' => null,
     'title' => $faker->sentence,
     'excerpt' => $faker->sentences(3, true),

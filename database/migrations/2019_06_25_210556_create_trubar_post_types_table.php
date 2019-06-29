@@ -14,7 +14,7 @@ class CreateTrubarPostTypesTable extends Migration
     public function up()
     {
         Schema::create('trubar_post_types', function (Blueprint $table) {
-            $table->string('slug');
+            $table->string('type')->unique();
             $table->timestamps();
             $table->softDeletes();
         });

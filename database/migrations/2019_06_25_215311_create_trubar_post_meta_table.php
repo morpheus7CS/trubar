@@ -14,8 +14,8 @@ class CreateTrubarPostMetaTable extends Migration
     public function up()
     {
         Schema::create('trubar_post_meta', function (Blueprint $table) {
-            $table->bigInteger('post_id')->unique();
-            $table->json('content');
+            $table->string('post_id')->unique();
+            $table->json('meta');
             $table->timestamps();
             $table->softDeletes();
         });

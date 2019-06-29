@@ -17,8 +17,8 @@ class CreateTrubarPostsTable extends Migration
             $table->uuid('id')->primary();
             $table->string('slug')->unique();
             $table->bigInteger('author_id')->index();
-            $table->bigInteger('post_type_id')->index();
-            $table->bigInteger('parent_id')->nullable();
+            $table->string('parent_id')->index()->nullable();
+            $table->string('post_type')->index();
             $table->string('title');
             $table->text('excerpt');
             $table->text('body');
