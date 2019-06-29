@@ -7,7 +7,7 @@ use Wewowweb\Trubar\Models\TrubarPost;
 
 $factory->define(TrubarPost::class, function (Faker $faker) {
     return [
-    'permalink' => $faker->slug,
+    'slug' => $faker->slug,
     'author_id' => 1,
     'post_type_id' => 1,
     'parent_id' => null,
