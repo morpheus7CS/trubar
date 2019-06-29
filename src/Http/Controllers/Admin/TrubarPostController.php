@@ -4,9 +4,9 @@ namespace Wewowweb\Trubar\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Wewowweb\Trubar\Http\Requests\GetTrubarPostsRequest;
-use Wewowweb\Trubar\Http\Resources\TrubarPostResource;
 use Wewowweb\Trubar\Models\TrubarPost;
+use Wewowweb\Trubar\Http\Resources\TrubarPostResource;
+use Wewowweb\Trubar\Http\Requests\GetTrubarPostsRequest;
 
 class TrubarPostController extends Controller
 {

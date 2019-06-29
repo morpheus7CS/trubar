@@ -14,6 +14,6 @@ $factory->define(TrubarPost::class, function (Faker $faker) {
     'title' => $faker->sentence,
     'excerpt' => $faker->sentences(3, true),
     'body' => $faker->randomHtml(),
-    'published_at' => $faker->dateTimeThisMonth
+    'published_at' => $faker->dateTimeThisMonth,
     ];
 });

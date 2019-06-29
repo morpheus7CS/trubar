@@ -2,9 +2,9 @@
 
 namespace Wewowweb\Trubar\Models;
 
+use Webpatser\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Webpatser\Uuid\Uuid;
 
 class TrubarPost extends Model
 {
@@ -15,7 +15,7 @@ class TrubarPost extends Model
     protected $casts = ['published_at'];
 
     /**
-     *  Setup model event hooks
+     *  Setup model event hooks.
      */
     public static function boot()
     {
