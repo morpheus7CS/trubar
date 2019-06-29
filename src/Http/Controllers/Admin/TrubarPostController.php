@@ -4,6 +4,8 @@ namespace Wewowweb\Trubar\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Wewowweb\Trubar\Http\Requests\GetTrubarPostsRequest;
+use Wewowweb\Trubar\Http\Resources\TrubarPostResource;
 use Wewowweb\Trubar\Models\TrubarPost;
 
 class TrubarPostController extends Controller
@@ -11,21 +13,15 @@ class TrubarPostController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param GetTrubarPostsRequest $request
+     * @return \Illuminate\Http\Resources\Json\AnonymousResourceCollection
      */
-    public function index()
+    public function index(GetTrubarPostsRequest $request)
     {
-        //
-    }
+        $perPage = $request->get('per_page') ?? 10;
+        $posts = $request->get('trashed_only') ? TrubarPost::onlyTrashed()->paginate($perPage) : TrubarPost::paginate($perPage);
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return TrubarPostResource::collection($posts);
     }
 
     /**
@@ -42,23 +38,12 @@ class TrubarPostController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \Trubar\Models\TrubarPost  $trubarPost
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return TrubarPostResource
      */
-    public function show(TrubarPost $trubarPost)
+    public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \Trubar\Models\TrubarPost  $trubarPost
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(TrubarPost $trubarPost)
-    {
-        //
+        return new TrubarPostResource(TrubarPost::withTrashed()->findOrFail($id));
     }
 
     /**

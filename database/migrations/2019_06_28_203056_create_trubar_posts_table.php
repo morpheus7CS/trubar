@@ -14,7 +14,7 @@ class CreateTrubarPostsTable extends Migration
     public function up()
     {
         Schema::create('trubar_posts', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->uuid('id')->primary();
             $table->string('permalink')->unique();
             $table->bigInteger('author_id')->index();
             $table->bigInteger('post_type_id')->index();
