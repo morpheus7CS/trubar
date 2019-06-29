@@ -10,7 +10,7 @@ class TrubarPostType extends Model
 {
     use SoftDeletes;
 
-    protected $fillable = ['slug'];
+    protected $fillable = ['type'];
 
     public function post()
     {
