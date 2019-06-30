@@ -7,6 +7,16 @@ use Wewowweb\Trubar\Models\TrubarPost;
 class TrubarPostTest extends BaseTest
 {
     /**
+     * Setup the test environment.
+     */
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        $this->login();
+    }
+
+    /**
      * @test
      */
     public function it_returns_a_list_of_posts()
@@ -87,5 +97,24 @@ class TrubarPostTest extends BaseTest
 
         $this->get(route('trubar.posts.show', ['id' => $post->id]))
             ->assertStatus(200);
+    }
+
+    /**
+     * @test
+     */
+    public function it_stores_a_new_post()
+    {
+        $data = factory(TrubarPost::class)->make();
+
+        $this->post(route('trubar.posts.store', [
+            'post_type' => $data->post_type,
+            'post_status' => $data->post_status,
+            'title' => $data->title,
+            'excerpt' => $data->excerpt,
+            'body' => $data->body,
+        ]))
+            ->assertStatus(201);
+
+        $this->assertDatabaseHas('trubar_posts', ['title' => $data->title]);
     }
 }

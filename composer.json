@@ -30,7 +30,8 @@
         "php": "^7.1",
         "illuminate/support": "5.8.*",
         "laravel/framework": "~5.8",
-        "ramsey/uuid": "^3.8"
+        "ramsey/uuid": "^3.8",
+        "spatie/laravel-sluggable": "^2.1"
     },
     "require-dev": {
         "orchestra/testbench": "3.8.*",

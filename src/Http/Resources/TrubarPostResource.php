@@ -16,7 +16,7 @@ class TrubarPostResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
+            'id' => $this->ids,
             'permalink' => $this->permalink,
             'author_id' => $this->author_id,
             'post_type_id' => $this->post_type_id,

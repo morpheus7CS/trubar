@@ -4,6 +4,8 @@ namespace Wewowweb\Trubar\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
+use Wewowweb\Trubar\Http\Requests\StoreTrubarPostRequest;
 use Wewowweb\Trubar\Models\TrubarPost;
 use Wewowweb\Trubar\Http\Resources\TrubarPostResource;
 use Wewowweb\Trubar\Http\Requests\GetTrubarPostsRequest;
@@ -27,12 +29,25 @@ class TrubarPostController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @param StoreTrubarPostRequest $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(StoreTrubarPostRequest $request)
     {
-        //
+        $post = TrubarPost::create([
+            'author_id' => $request->user()->getAuthIdentifier(),
+            'post_type' => $request->get('post_type'),
+            'post_status' => $request->get('post_status'),
+            'parent_id' => $request->get('parent_id'),
+            'title' => $request->get('title'),
+            'excerpt' => $request->get('excerpt'),
+            'body' => $request->get('body'),
+            'published_at' => $request->get('published_at'),
+        ]);
+
+        return (new TrubarPostResource($post->refresh()))
+            ->response()
+            ->setStatusCode(201);
     }
 
     /**
@@ -49,8 +64,8 @@ class TrubarPostController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Trubar\Models\TrubarPost  $trubarPost
+     * @param \Illuminate\Http\Request $request
+     * @param \Trubar\Models\TrubarPost $trubarPost
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, TrubarPost $trubarPost)
@@ -61,10 +76,21 @@ class TrubarPostController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \Trubar\Models\TrubarPost  $trubarPost
+     * @param \Trubar\Models\TrubarPost $trubarPost
      * @return \Illuminate\Http\Response
      */
     public function destroy(TrubarPost $trubarPost)
+    {
+        //
+    }
+
+    /**
+     * Restore the specified resource from storage.
+     *
+     * @param \Trubar\Models\TrubarPost $trubarPost
+     * @return \Illuminate\Http\Response
+     */
+    public function restore(TrubarPost $trubarPost)
     {
         //
     }
