@@ -51,7 +51,7 @@ class TrubarPostTest extends BaseTest
     /**
      * @test
      */
-    public function it_returns_a_only_trashed_pagianted_results()
+    public function it_returns_a_only_trashed_paginated_results()
     {
         $posts = factory(TrubarPost::class)->times(5)->create();
 
