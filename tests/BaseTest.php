@@ -4,7 +4,7 @@ namespace Wewowweb\Trubar\Tests;
 
 use Illuminate\Contracts\Auth\Authenticatable;
 use Orchestra\Testbench\TestCase;
-use Wewowweb\Trubar\Tests\TestModels\TestUser;
+use Wewowweb\Trubar\Models\TrubarUser;
 use Wewowweb\Trubar\TrubarServiceProvider;
 
 abstract class BaseTest extends TestCase
@@ -41,7 +41,7 @@ abstract class BaseTest extends TestCase
 
     protected function login(Authenticatable $user = null): Authenticatable
     {
-        $user = $user ?? factory(TestUser::class)->create();
+        $user = $user ?? factory(TrubarUser::class)->create();
         $this->actingAs($user);
 
         return $user;

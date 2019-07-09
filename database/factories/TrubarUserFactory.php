@@ -4,9 +4,9 @@
 
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
-use Wewowweb\Trubar\Tests\TestModels\TestUser;
+use Wewowweb\Trubar\Models\TrubarUser;
 
-$factory->define(TestUser::class, function (Faker $faker) {
+$factory->define(TrubarUser::class, function (Faker $faker) {
     return [
         'name' => $faker->name,
         'email' => $faker->unique()->safeEmail,
