@@ -21,9 +21,6 @@ class TrubarUserTest extends BaseTest
      */
     public function a_user_can_register()
     {
-        $response = $this->json('POST', '/trubar/register', ['name' => 'Sally']);
-
-        dd($response);
 
         $data = factory(TrubarUser::class)->make();
 
