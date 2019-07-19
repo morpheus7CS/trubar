@@ -3,10 +3,13 @@
 namespace Wewowweb\Trubar;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Wewowweb\Trubar\Console\InstallCommand;
+use Wewowweb\Trubar\Models\TrubarPost;
 use Wewowweb\Trubar\Models\TrubarUser;
+use Wewowweb\Trubar\Policies\TrubarPostPolicy;
 
 class TrubarServiceProvider extends ServiceProvider
 {
@@ -22,6 +25,7 @@ class TrubarServiceProvider extends ServiceProvider
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'trubar');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         $this->registerAuthGuard();
+        $this->registerPolicies();
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
@@ -85,5 +89,16 @@ class TrubarServiceProvider extends ServiceProvider
             'driver' => 'session',
             'provider' => 'trubar_users',
         ]);
+    }
+
+    private function registerPolicies()
+    {
+        $policies = [
+            TrubarPost::class => TrubarPostPolicy::class,
+        ];
+
+        foreach ($policies as $key => $value) {
+            Gate::policy($key, $value);
+        }
     }
 }

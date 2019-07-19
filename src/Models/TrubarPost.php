@@ -7,9 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
-use Wewowweb\Trubar\Models\TrubarPostMeta;
-use Wewowweb\Trubar\Models\TrubarPostType;
-use Wewowweb\Trubar\Models\TrubarUser;
 
 class TrubarPost extends Model
 {
@@ -53,7 +50,7 @@ class TrubarPost extends Model
 
     public function author()
     {
-        return $this->hasOne(TrubarUser::class);
+        return $this->hasOne(TrubarUser::class, 'id', 'author_id');
     }
 
     public function parent()

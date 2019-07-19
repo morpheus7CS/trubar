@@ -12,8 +12,6 @@ class TrubarPostTest extends BaseTest
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->login();
     }
 
     /**
@@ -21,6 +19,8 @@ class TrubarPostTest extends BaseTest
      */
     public function it_returns_a_list_of_posts()
     {
+        $this->login();
+
         factory(TrubarPost::class)->times(5)->create();
         $this->get(route('trubar.posts.index'))->assertStatus(200);
     }
@@ -30,6 +30,8 @@ class TrubarPostTest extends BaseTest
      */
     public function it_returns_a_default_number_of_paginated_results()
     {
+        $this->login();
+
         factory(TrubarPost::class)->times(100)->create();
         $this->get(route('trubar.posts.index'))
             ->assertStatus(200)
@@ -41,6 +43,8 @@ class TrubarPostTest extends BaseTest
      */
     public function it_returns_a_set_number_of_paginated_results()
     {
+        $this->login();
+
         $perPage = 20;
         factory(TrubarPost::class)->times(100)->create();
         $this->get(route('trubar.posts.index', ['per_page' => $perPage]))
@@ -53,6 +57,8 @@ class TrubarPostTest extends BaseTest
      */
     public function it_returns_a_only_trashed_paginated_results()
     {
+        $this->login();
+
         $posts = factory(TrubarPost::class)->times(5)->create();
 
         $posts->each(function ($item) {
@@ -73,6 +79,8 @@ class TrubarPostTest extends BaseTest
      */
     public function it_returns_a_single_post()
     {
+        $this->login();
+
         $post = factory(TrubarPost::class)->create();
         $this->get(route('trubar.posts.show', ['id' => $post->id]))
             ->assertStatus(200);
@@ -83,6 +91,8 @@ class TrubarPostTest extends BaseTest
      */
     public function it_fails_to_return_a_missing_post()
     {
+        $this->login();
+
         $this->get(route('trubar.posts.show', ['id' => 'undefined']))
             ->assertStatus(404);
     }
@@ -92,6 +102,8 @@ class TrubarPostTest extends BaseTest
      */
     public function it_returns_a_deleted_post()
     {
+        $this->login();
+
         $post = factory(TrubarPost::class)->create();
         $post->delete();
 
@@ -104,6 +116,8 @@ class TrubarPostTest extends BaseTest
      */
     public function it_stores_a_new_post()
     {
+        $this->login();
+
         $data = factory(TrubarPost::class)->make();
 
         $this->post(route('trubar.posts.store', [
@@ -121,11 +135,11 @@ class TrubarPostTest extends BaseTest
     /**
      * @test
      */
-    public function it_can_update_a_post()
+    public function an_author_can_update_a_post()
     {
         $post = factory(TrubarPost::class)->create();
 
-        $this->json('PUT', route('trubar.posts.update', $post->id), [
+        $this->actingAs($post->author)->json('PUT', route('trubar.posts.update', $post->id), [
             'post_type' => $post->post_type,
             'post_status' => $post->post_status,
             'title' => 'updated',
@@ -139,11 +153,11 @@ class TrubarPostTest extends BaseTest
     /**
      * @test
      */
-    public function it_can_delete_a_post()
+    public function an_author_can_delete_a_post()
     {
         $post = factory(TrubarPost::class)->create();
 
-        $this->json('DELETE', route('trubar.posts.delete', $post->id))
+        $this->actingAs($post->author)->json('DELETE', route('trubar.posts.delete', $post->id))
             ->assertStatus(200);
 
         $this->assertDatabaseMissing('trubar_posts', ['id' => $post->id, 'deleted_at' => null]);
@@ -157,7 +171,7 @@ class TrubarPostTest extends BaseTest
         $post = factory(TrubarPost::class)->create();
         $post->delete();
 
-        $this->json('PUT', route('trubar.posts.restore', $post->id))
+        $this->actingAs($post->author)->json('PUT', route('trubar.posts.restore', $post->id))
             ->assertStatus(200);
 
         $this->assertDatabaseHas('trubar_posts', ['id' => $post->id, 'deleted_at' => null]);

@@ -5,12 +5,13 @@
 use Faker\Generator as Faker;
 use Illuminate\Support\Str;
 use Wewowweb\Trubar\Models\TrubarPost;
+use Wewowweb\Trubar\Models\TrubarUser;
 use Wewowweb\Trubar\Models\User;
 
 $factory->define(TrubarPost::class, function (Faker $faker) {
     return [
     'slug' => $faker->slug,
-    'author_id' => 1,
+    'author_id' => factory(TrubarUser::class)->create()->id,
     'post_type' => $faker->word,
     'post_status' => $faker->word,
     'parent_id' => null,

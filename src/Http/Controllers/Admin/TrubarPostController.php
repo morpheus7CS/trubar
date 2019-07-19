@@ -2,6 +2,7 @@
 
 namespace Wewowweb\Trubar\Http\Controllers\Admin;
 
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Wewowweb\Trubar\Http\Requests\StoreTrubarPostRequest;
@@ -12,6 +13,8 @@ use Wewowweb\Trubar\Http\Requests\GetTrubarPostsRequest;
 
 class TrubarPostController extends Controller
 {
+    use AuthorizesRequests;
+
     /**
      * Display a listing of the resource.
      *
@@ -53,13 +56,15 @@ class TrubarPostController extends Controller
     /**
      * Update the specified resource.
      *
-     * @param $id
      * @param UpdateTrubarPostRequest $request
+     * @param $id
      * @return TrubarPostResource
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function update(UpdateTrubarPostRequest $request, $id)
     {
         $post = TrubarPost::withTrashed()->findOrFail($id);
+        $this->authorize('update', $post);
 
         $post->fill($request->all());
         $post->save();
@@ -72,10 +77,12 @@ class TrubarPostController extends Controller
      *
      * @param $id
      * @return TrubarPostResource
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function show($id)
     {
-        return new TrubarPostResource(TrubarPost::withTrashed()->findOrFail($id));
+        $post = TrubarPost::withTrashed()->findOrFail($id);
+        return new TrubarPostResource($post);
     }
 
     /**
@@ -83,10 +90,12 @@ class TrubarPostController extends Controller
      *
      * @param $id
      * @return TrubarPostResource
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function delete($id)
     {
         $post = TrubarPost::findOrFail($id);
+        $this->authorize('update', $post);
         $post->delete();
 
         return new TrubarPostResource($post->refresh());
@@ -95,12 +104,14 @@ class TrubarPostController extends Controller
     /**
      * Restore the specified resource from storage.
      *
-     * @param \Trubar\Models\TrubarPost $trubarPost
+     * @param $id
      * @return TrubarPostResource
+     * @throws \Illuminate\Auth\Access\AuthorizationException
      */
     public function restore($id)
     {
         $post = TrubarPost::withTrashed()->findOrFail($id);
+        $this->authorize('update', $post);
         $post->restore();
 
         return new TrubarPostResource($post->refresh());
