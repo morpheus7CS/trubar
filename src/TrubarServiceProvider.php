@@ -2,9 +2,11 @@
 
 namespace Wewowweb\Trubar;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\ServiceProvider;
 use Wewowweb\Trubar\Console\InstallCommand;
+use Wewowweb\Trubar\Models\TrubarUser;
 
 class TrubarServiceProvider extends ServiceProvider
 {
@@ -19,6 +21,7 @@ class TrubarServiceProvider extends ServiceProvider
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'trubar');
         // $this->loadViewsFrom(__DIR__.'/../resources/views', 'trubar');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+        $this->registerAuthGuard();
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
@@ -65,5 +68,22 @@ class TrubarServiceProvider extends ServiceProvider
         $this->app->singleton('trubar', function () {
             return new Trubar;
         });
+    }
+
+    /**
+     * Register the package's authentication guard.
+     *
+     * @return void
+     */
+    private function registerAuthGuard()
+    {
+        $this->app['config']->set('auth.providers.trubar_users', [
+            'driver' => 'eloquent',
+            'model' => TrubarUser::class,
+        ]);
+        $this->app['config']->set('auth.guards.trubar', [
+            'driver' => 'session',
+            'provider' => 'trubar_users',
+        ]);
     }
 }

@@ -14,6 +14,7 @@ Route::namespace('Admin\Auth')
 ->group(function () {
     // Registration Routes...
     Route::post('register', 'RegisterController@register')->name('register');
+    Route::post('login', 'LoginController@login')->name('login');
 });
 
 // Catch-all Route...

@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class TrubarUser extends Authenticatable
 {
-    use Notifiable, SoftDeletes;
+    use Notifiable;
 
     /**
      * The attributes that are mass assignable.
