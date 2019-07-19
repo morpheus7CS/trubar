@@ -117,4 +117,49 @@ class TrubarPostTest extends BaseTest
 
         $this->assertDatabaseHas('trubar_posts', ['title' => $data->title]);
     }
+
+    /**
+     * @test
+     */
+    public function it_can_update_a_post()
+    {
+        $post = factory(TrubarPost::class)->create();
+
+        $this->json('PUT', route('trubar.posts.update', $post->id), [
+            'post_type' => $post->post_type,
+            'post_status' => $post->post_status,
+            'title' => 'updated',
+            'excerpt' => 'updated',
+            'body' => 'updated'
+        ])->assertStatus(200);
+
+        $this->assertDatabaseHas('trubar_posts', ['id' => $post->id, 'title' => 'updated', 'excerpt' => 'updated', 'body' => 'updated']);
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_delete_a_post()
+    {
+        $post = factory(TrubarPost::class)->create();
+
+        $this->json('DELETE', route('trubar.posts.delete', $post->id))
+            ->assertStatus(200);
+
+        $this->assertDatabaseMissing('trubar_posts', ['id' => $post->id, 'deleted_at' => null]);
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_restore_a_deleted_post()
+    {
+        $post = factory(TrubarPost::class)->create();
+        $post->delete();
+
+        $this->json('PUT', route('trubar.posts.restore', $post->id))
+            ->assertStatus(200);
+
+        $this->assertDatabaseHas('trubar_posts', ['id' => $post->id, 'deleted_at' => null]);
+    }
 }

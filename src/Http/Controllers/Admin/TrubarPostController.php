@@ -4,8 +4,8 @@ namespace Wewowweb\Trubar\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Auth;
 use Wewowweb\Trubar\Http\Requests\StoreTrubarPostRequest;
+use Wewowweb\Trubar\Http\Requests\UpdateTrubarPostRequest;
 use Wewowweb\Trubar\Models\TrubarPost;
 use Wewowweb\Trubar\Http\Resources\TrubarPostResource;
 use Wewowweb\Trubar\Http\Requests\GetTrubarPostsRequest;
@@ -51,6 +51,23 @@ class TrubarPostController extends Controller
     }
 
     /**
+     * Update the specified resource.
+     *
+     * @param $id
+     * @param UpdateTrubarPostRequest $request
+     * @return TrubarPostResource
+     */
+    public function update(UpdateTrubarPostRequest $request, $id)
+    {
+        $post = TrubarPost::withTrashed()->findOrFail($id);
+
+        $post->fill($request->all());
+        $post->save();
+
+        return new TrubarPostResource($post->refresh());
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param $id
@@ -62,36 +79,30 @@ class TrubarPostController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @param \Trubar\Models\TrubarPost $trubarPost
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, TrubarPost $trubarPost)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
-     * @param \Trubar\Models\TrubarPost $trubarPost
-     * @return \Illuminate\Http\Response
+     * @param $id
+     * @return TrubarPostResource
      */
-    public function destroy(TrubarPost $trubarPost)
+    public function delete($id)
     {
-        //
+        $post = TrubarPost::findOrFail($id);
+        $post->delete();
+
+        return new TrubarPostResource($post->refresh());
     }
 
     /**
      * Restore the specified resource from storage.
      *
      * @param \Trubar\Models\TrubarPost $trubarPost
-     * @return \Illuminate\Http\Response
+     * @return TrubarPostResource
      */
-    public function restore(TrubarPost $trubarPost)
+    public function restore($id)
     {
-        //
+        $post = TrubarPost::withTrashed()->findOrFail($id);
+        $post->restore();
+
+        return new TrubarPostResource($post->refresh());
     }
 }
